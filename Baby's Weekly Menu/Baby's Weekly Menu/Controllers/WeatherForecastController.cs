@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Baby_s_Weekly_Menu.Controllers
+namespace BabysWeeklyMenu.Controllers
 {
     [ApiController]
     [Route("[controller]")]

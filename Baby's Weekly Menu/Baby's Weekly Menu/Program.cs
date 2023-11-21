@@ -1,4 +1,4 @@
-namespace Baby_s_Weekly_Menu
+namespace BabysWeeklyMenu
 {
     public class Program
     {
