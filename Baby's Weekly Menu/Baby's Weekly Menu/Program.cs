@@ -1,3 +1,6 @@
+using BabysWeeklyMenu.API.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace BabysWeeklyMenu
 {
     public class Program
@@ -12,6 +15,11 @@ namespace BabysWeeklyMenu
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<WeeklyMenuContext>(options =>
+            {
+                options.UseInMemoryDatabase("WeeklyMenu");
+            });
 
             var app = builder.Build();
 

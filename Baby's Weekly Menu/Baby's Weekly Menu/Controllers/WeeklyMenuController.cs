@@ -1,19 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BabysWeeklyMenu.API.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BabysWeeklyMenu.Controllers
 {
     [ApiController]
     public class WeeklyMenuController : ControllerBase
     {
+        private readonly WeeklyMenuContext _context;
+
+        public WeeklyMenuController(WeeklyMenuContext context)
+        {
+            _context = context ?? throw new ArgumentNullException();
+            _context.Database.EnsureCreated();
+        }
+
         [HttpGet]
         [Route("/api/weekly")]
-        public JsonResult GetWeeklyMenu()
+        public async Task<ActionResult> GetWeeklyMenu()
         {
-            return new JsonResult(
-                new List<object> { 
-                    new { id = 1, Time = 10, Name="Fish"},
-                    new { id = 2, Time = 11, Name="Boiled Egg"}
-                });
+            var menuItemsList = await _context.MenuItems.ToListAsync();
+            return new JsonResult(menuItemsList);
         }
     }
 }
