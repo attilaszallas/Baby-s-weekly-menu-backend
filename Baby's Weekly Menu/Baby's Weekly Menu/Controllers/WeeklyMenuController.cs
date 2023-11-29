@@ -1,4 +1,4 @@
-﻿using BabysWeeklyMenu.API.Models;
+﻿using BabysWeeklyMenu.API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +16,35 @@ namespace BabysWeeklyMenu.Controllers
         }
 
         [HttpGet]
-        [Route("/api/weekly")]
+        [Route("/api/allergies")]
+        public async Task<ActionResult> GetAllAllergies()
+        {
+            var allergiesList = await _context.Allergies.ToListAsync();
+            return new JsonResult(allergiesList);
+        }
+
+        [HttpGet]
+        [Route("/api/ingredients")]
+        public async Task<ActionResult> GetAllIngredients()
+        {
+            var ingredientsList = await _context.Ingredients.ToListAsync();
+            return new JsonResult(ingredientsList);
+        }
+
+        [HttpGet]
+        [Route("/api/dishes")]
+        public async Task<ActionResult> GetAllMeals()
+        {
+            var dishesList = await _context.Dishes.ToListAsync();
+            return new JsonResult(dishesList);
+        }
+
+        [HttpGet]
+        [Route("/api/meals")]
         public async Task<ActionResult> GetWeeklyMenu()
         {
-            var menuItemsList = await _context.MenuItems.ToListAsync();
-            return new JsonResult(menuItemsList);
+            var mealsList = await _context.Meals.ToListAsync();
+            return new JsonResult(mealsList);
         }
     }
 }

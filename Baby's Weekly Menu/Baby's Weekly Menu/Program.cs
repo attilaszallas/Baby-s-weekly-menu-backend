@@ -1,4 +1,4 @@
-using BabysWeeklyMenu.API.Models;
+using BabysWeeklyMenu.API.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BabysWeeklyMenu
