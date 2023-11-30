@@ -21,6 +21,6 @@ public static class ModelBuilderExtensions
 
         modelBuilder.Entity<Meal>().HasData(
             new Meal { Id = 1, Time = 10 },
-            new Meal { Id = 3, Time = 14 });
+            new Meal { Id = 2, Time = 14 });
     }
 }

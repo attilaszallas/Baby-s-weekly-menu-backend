@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BabysWeeklyMenu.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class WeeklyMenuController : ControllerBase
     {
@@ -19,32 +20,64 @@ namespace BabysWeeklyMenu.Controllers
         [Route("/api/allergies")]
         public async Task<ActionResult> GetAllAllergies()
         {
-            var allergiesList = await _context.Allergies.ToListAsync();
-            return new JsonResult(allergiesList);
+            var allergies = await _context.Allergies.ToListAsync();
+            return new JsonResult(allergies);
+        }
+
+        [HttpGet]
+        [Route("/api/allergies/{id}")]
+        public async Task<ActionResult> GetAllergy(int id)
+        {
+            var selectedAllergy = await _context.Allergies.FindAsync(id);
+            return new JsonResult(selectedAllergy);
         }
 
         [HttpGet]
         [Route("/api/ingredients")]
         public async Task<ActionResult> GetAllIngredients()
         {
-            var ingredientsList = await _context.Ingredients.ToListAsync();
-            return new JsonResult(ingredientsList);
+            var ingredients = await _context.Ingredients.ToListAsync();
+            return new JsonResult(ingredients);
+        }
+
+        [HttpGet]
+        [Route("/api/ingredient/{id}")]
+        public async Task<ActionResult> GetIngredient(int id)
+        {
+            var selectedIngredient = await _context.Ingredients.FindAsync(id);
+            return new JsonResult(selectedIngredient);
         }
 
         [HttpGet]
         [Route("/api/dishes")]
-        public async Task<ActionResult> GetAllMeals()
+        public async Task<ActionResult> GetAllDishes()
         {
-            var dishesList = await _context.Dishes.ToListAsync();
-            return new JsonResult(dishesList);
+            var dishes = await _context.Dishes.ToListAsync();
+            return new JsonResult(dishes);
+        }
+
+        [HttpGet]
+        [Route("/api/dish/{id}")]
+        public async Task<ActionResult> GetDish(int id)
+        {
+            var selectedDish = await _context.Dishes.FindAsync(id);
+            return new JsonResult(selectedDish);
         }
 
         [HttpGet]
         [Route("/api/meals")]
-        public async Task<ActionResult> GetWeeklyMenu()
+        public async Task<ActionResult> GetAllMeals()
         {
-            var mealsList = await _context.Meals.ToListAsync();
-            return new JsonResult(mealsList);
+            var meals = await _context.Meals.ToListAsync();
+            return new JsonResult(meals);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult> GetMeal(int id)
+        {
+            var selectedMeals = await _context.Meals.FindAsync(id);
+            return new JsonResult(selectedMeals);
         }
     }
 }
