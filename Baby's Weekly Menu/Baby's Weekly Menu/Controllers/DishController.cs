@@ -21,6 +21,11 @@ namespace BabysWeeklyMenu.API.Controllers
         public async Task<ActionResult> GetAllDishes()
         {
             var dishes = await _context.Dishes.ToListAsync();
+            if (dishes == null)
+            {
+                return NotFound();
+            }
+
             return new JsonResult(dishes);
         }
 
@@ -29,6 +34,11 @@ namespace BabysWeeklyMenu.API.Controllers
         public async Task<ActionResult> GetDish(int id)
         {
             var selectedDish = await _context.Dishes.FindAsync(id);
+            if (selectedDish == null)
+            {
+                return NotFound();
+            }
+
             return new JsonResult(selectedDish);
         }
     }

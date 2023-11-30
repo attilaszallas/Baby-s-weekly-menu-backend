@@ -21,6 +21,11 @@ namespace BabysWeeklyMenu.API.Controllers
         public async Task<ActionResult> GetAllAllergies()
         {
             var allergies = await _context.Allergies.ToListAsync();
+            if (allergies == null)
+            {
+                return NotFound();
+            }
+
             return new JsonResult(allergies);
         }
 
@@ -29,6 +34,11 @@ namespace BabysWeeklyMenu.API.Controllers
         public async Task<ActionResult> GetAllergy(int id)
         {
             var selectedAllergy = await _context.Allergies.FindAsync(id);
+            if (selectedAllergy == null)
+            {
+                return NotFound();
+            }
+
             return new JsonResult(selectedAllergy);
         }
     }

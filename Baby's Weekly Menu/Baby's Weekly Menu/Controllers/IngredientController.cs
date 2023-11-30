@@ -21,6 +21,11 @@ namespace BabysWeeklyMenu.API.Controllers
         public async Task<ActionResult> GetAllIngredients()
         {
             var ingredients = await _context.Ingredients.ToListAsync();
+            if (ingredients == null)
+            {
+                return NotFound();
+            }
+
             return new JsonResult(ingredients);
         }
 
@@ -29,6 +34,11 @@ namespace BabysWeeklyMenu.API.Controllers
         public async Task<ActionResult> GetIngredient(int id)
         {
             var selectedIngredient = await _context.Ingredients.FindAsync(id);
+            if (selectedIngredient == null)
+            {
+                return NotFound();
+            }
+
             return new JsonResult(selectedIngredient);
         }
     }
