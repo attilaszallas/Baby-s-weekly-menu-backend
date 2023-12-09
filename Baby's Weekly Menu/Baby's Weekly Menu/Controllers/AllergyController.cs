@@ -53,9 +53,39 @@ namespace BabysWeeklyMenu.API.Controllers
             return new JsonResult(allergy);
         }
 
+        [HttpPut]
+        [Route("/api/allergy/{id}")]
+        public async Task<ActionResult> PutAllergy(int id, Allergy allergy)
+        {
+            if (id != allergy.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(allergy).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Allergies.Any(a => a.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         [HttpDelete]
         [Route("/api/allergy/{id}")]
-        public async Task<ActionResult> DeleteAllergy(int id)
+        public async Task<ActionResult<Allergy>> DeleteAllergy(int id)
         {
             var allergy = await _context.Allergies.FindAsync(id);
 
