@@ -31,7 +31,7 @@ namespace BabysWeeklyMenu.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("/api/meal/{id}")]
         public async Task<ActionResult> GetMeal(int id)
         {
             var selectedMeals = await _context.Meals.FindAsync(id);
@@ -44,7 +44,8 @@ namespace BabysWeeklyMenu.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostMeal(Meal meal)
+        [Route("/api/meal/{id}")]
+        public async Task<ActionResult<Meal>> PostMeal(Meal meal)
         {
             _context.Meals.Add(meal);
             await _context.SaveChangesAsync();

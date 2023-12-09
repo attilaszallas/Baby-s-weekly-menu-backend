@@ -31,7 +31,7 @@ namespace BabysWeeklyMenu.API.Controllers
         }
 
         [HttpGet]
-        [Route("/api/allergies/{id}")]
+        [Route("/api/allergy/{id}")]
         public async Task<ActionResult> GetAllergy(int id)
         {
             var selectedAllergy = await _context.Allergies.FindAsync(id);
@@ -44,7 +44,8 @@ namespace BabysWeeklyMenu.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostAllergy(Allergy allergy)
+        [Route("/api/allergy/{id}")]
+        public async Task<ActionResult<Allergy>> PostAllergy(Allergy allergy)
         { 
             _context.Allergies.Add(allergy);
             await _context.SaveChangesAsync();

@@ -44,12 +44,13 @@ namespace BabysWeeklyMenu.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostMeal(Meal meal)
+        [Route("/api/ingredient/{id}")]
+        public async Task<ActionResult<Ingredient>> PostMeal(Ingredient ingredient)
         {
-            _context.Meals.Add(meal);
+            _context.Ingredients.Add(ingredient);
             await _context.SaveChangesAsync();
 
-            return new JsonResult(meal);
+            return new JsonResult(ingredient);
         }
     }
 }

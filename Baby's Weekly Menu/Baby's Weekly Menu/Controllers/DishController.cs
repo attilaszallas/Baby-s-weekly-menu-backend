@@ -44,7 +44,8 @@ namespace BabysWeeklyMenu.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostDish(Dish dish)
+        [Route("/api/dish/{id}")]
+        public async Task<ActionResult<Dish>> PostDish(Dish dish)
         {
             _context.Dishes.Add(dish);
             await _context.SaveChangesAsync();
