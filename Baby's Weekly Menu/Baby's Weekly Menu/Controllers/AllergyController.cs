@@ -1,4 +1,5 @@
 ﻿using BabysWeeklyMenu.API.Data;
+using BabysWeeklyMenu.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,15 @@ namespace BabysWeeklyMenu.API.Controllers
             }
 
             return new JsonResult(selectedAllergy);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostAllergy(Allergy allergy)
+        { 
+            _context.Allergies.Add(allergy);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult(allergy);
         }
     }
 }

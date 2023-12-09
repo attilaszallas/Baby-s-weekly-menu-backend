@@ -1,4 +1,5 @@
 ﻿using BabysWeeklyMenu.API.Data;
+using BabysWeeklyMenu.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,5 +42,15 @@ namespace BabysWeeklyMenu.API.Controllers
 
             return new JsonResult(selectedMeals);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> PostMeal(Meal meal)
+        {
+            _context.Meals.Add(meal);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult(meal);
+        }
+
     }
 }
