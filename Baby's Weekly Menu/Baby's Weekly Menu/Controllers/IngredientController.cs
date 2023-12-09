@@ -45,9 +45,23 @@ namespace BabysWeeklyMenu.API.Controllers
 
         [HttpPost]
         [Route("/api/ingredient/{id}")]
-        public async Task<ActionResult<Ingredient>> PostMeal(Ingredient ingredient)
+        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
         {
             _context.Ingredients.Add(ingredient);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult(ingredient);
+        }
+
+        [HttpDelete]
+        [Route("/api/ingredient/{id}")]
+        public async Task<ActionResult> DeleteIngredient(int id)
+        {
+            var ingredient = await _context.Ingredients.FindAsync(id);
+
+            if (ingredient == null) { return NotFound(); }
+
+            _context.Ingredients.Remove(ingredient);
             await _context.SaveChangesAsync();
 
             return new JsonResult(ingredient);

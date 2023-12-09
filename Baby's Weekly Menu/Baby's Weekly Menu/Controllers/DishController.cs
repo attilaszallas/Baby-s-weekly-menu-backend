@@ -52,5 +52,19 @@ namespace BabysWeeklyMenu.API.Controllers
 
             return new JsonResult(dish);
         }
+
+        [HttpDelete]
+        [Route("/api/dish/{id}")]
+        public async Task<ActionResult> DeleteDish(int id)
+        {
+            var dish = await _context.Dishes.FindAsync(id);
+
+            if (dish == null) { return NotFound(); }
+
+            _context.Dishes.Remove(dish);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult(dish);
+        }
     }
 }

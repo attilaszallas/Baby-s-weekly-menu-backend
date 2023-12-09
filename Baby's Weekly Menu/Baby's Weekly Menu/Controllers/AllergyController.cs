@@ -52,5 +52,19 @@ namespace BabysWeeklyMenu.API.Controllers
 
             return new JsonResult(allergy);
         }
+
+        [HttpDelete]
+        [Route("/api/allergy/{id}")]
+        public async Task<ActionResult> DeleteAllergy(int id)
+        {
+            var allergy = await _context.Allergies.FindAsync(id);
+
+            if (allergy == null) { return NotFound(); }
+
+            _context.Allergies.Remove(allergy);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult(allergy);
+        }
     }
 }
